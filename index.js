@@ -506,15 +506,15 @@ function closeMob() {
 
 if (menuBtn) {
   menuBtn.addEventListener('click', function() {
-    mobOverlay.classList.add('open');
+    if (mobOverlay) mobOverlay.classList.add('open');
     menuBtn.classList.add('open');
     menuBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   });
 }
 if (mobX) {
-  mobX.addEventListener('click', closeMob);
-  mobX.addEventListener('touchend', function(e) { e.preventDefault(); closeMob(); });
+  mobX.addEventListener('click', function(e) { e.stopPropagation(); closeMob(); });
+  mobX.addEventListener('touchstart', function(e) { e.stopPropagation(); closeMob(); }, { passive: true });
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMob(); });
 

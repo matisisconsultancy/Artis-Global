@@ -105,7 +105,7 @@ img { display:block; max-width:100% }
 /* Mobile overlay */
 .mob-overlay { display:none; position:fixed; inset:0; z-index:99; background:var(--bg); flex-direction:column; align-items:center; justify-content:center; gap:2rem }
 .mob-overlay.open { display:flex }
-.mob-x { position:absolute; top:1.4rem; right:var(--gutter); font-size:1.6rem; color:var(--muted); transition:color .2s; cursor:pointer; background:none; border:none; padding:.6rem; line-height:1; -webkit-tap-highlight-color:transparent; touch-action:manipulation }
+.mob-x { position:absolute; top:1rem; right:var(--gutter); font-size:1.6rem; color:var(--muted); transition:color .2s; cursor:pointer; background:none; border:none; padding:1rem; line-height:1; -webkit-tap-highlight-color:transparent; touch-action:manipulation; z-index:101 }
 .mob-x:hover { color:var(--white) }
 .mob-overlay a { font-family:var(--sans); font-weight:300; font-size:2.2rem; color:var(--white); transition:color .2s }
 .mob-overlay a:hover, .mob-cta-link { color:var(--lima) }
@@ -735,20 +735,20 @@ section h2 em { color:var(--lima); font-style:italic }
   .dsc-spacer { height:0 }
 
   /* Cards — horizontal scroll gallery */
+  .dsc-sticky { overflow:visible }
   .dsc-cards {
     position: relative; z-index: 10;
     display: flex;
     flex-direction: row;
     gap: .85rem;
     padding: 1.6rem var(--gutter) 1.8rem;
-    padding-right: var(--gutter);
     background: var(--bg2);
     overflow-x: auto;
     overflow-y: visible;
+    pointer-events: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scroll-padding-left: var(--gutter);
-    /* hide scrollbar but keep scroll */
     scrollbar-width: none;
   }
   .dsc-cards::-webkit-scrollbar { display: none }
