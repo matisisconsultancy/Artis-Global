@@ -2029,3 +2029,21 @@ section h2 em { color:var(--lima); font-style:italic }
 .hero-headline-block .hero-h1{text-shadow:0 2px 28px rgba(0,0,0,.55)}
 .hero-sub{text-shadow:0 1px 16px rgba(0,0,0,.6)}
 @media(max-width:640px){ .hero-headline-block{opacity:1} }
+
+/* ── Hero ahora es solo la imagen (sin recorrido largo) ── */
+#hero-wrap{height:100vh}
+.hero-spacer{display:none}
+
+/* ── STATEMENT: el texto se ilumina con el scroll ── */
+.statement{position:relative;height:220vh;background:var(--bg)}
+.statement-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:0 var(--gutter)}
+.statement-text{max-width:1000px;margin:0 auto;font-family:var(--sans);font-weight:300;font-size:clamp(1.9rem,5vw,4.2rem);line-height:1.22;letter-spacing:-.02em}
+.statement-text .w{color:rgba(255,255,255,var(--o,.12));transition:color .12s linear}
+.statement-text .w.lima{color:rgba(168,216,50,var(--o,.12))}
+@media(max-width:640px){ .statement{height:200vh} .statement-text{font-size:clamp(1.6rem,7.5vw,2.5rem)} }
+@media(prefers-reduced-motion:reduce){
+  .statement{height:auto}
+  .statement-sticky{position:static;height:auto;padding:clamp(4rem,10vw,7rem) var(--gutter)}
+  .statement-text .w{color:#fff!important}
+  .statement-text .w.lima{color:var(--lima)!important}
+}
