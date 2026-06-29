@@ -45,7 +45,7 @@ function heroTick() {
   const sY      = window.scrollY;
   const wrapTop = heroWrap.getBoundingClientRect().top + sY;
   const room    = heroWrap.offsetHeight - window.innerHeight;
-  const p       = clamp((sY - wrapTop) / room, 0, 1);
+  const p       = room > 0 ? clamp((sY - wrapTop) / room, 0, 1) : 0;
 
   const lift = p < PHASE_IN ? 0 : easeOut((p - PHASE_IN) / (1 - PHASE_IN)) * HERO_LIFT;
   if (heroHeadline) {
@@ -663,4 +663,43 @@ $$('a[href^="#"]').forEach(function(a) {
       dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
     }, { passive: true });
   }
+})();
+
+/* ─────────────────────────────────────────────────
+   20. STATEMENT — iluminar el texto con el scroll
+───────────────────────────────────────────────── */
+(function () {
+  var el   = document.getElementById('statementText');
+  var wrap = document.getElementById('statement');
+  if (!el || !wrap) return;
+
+  var lima = (el.getAttribute('data-lima') || '').split(',')
+              .map(function (s) { return s.trim().toLowerCase(); }).filter(Boolean);
+  var words = el.textContent.trim().split(/\s+/);
+  el.innerHTML = words.map(function (w) {
+    var cls = lima.indexOf(w.toLowerCase()) > -1 ? 'w lima' : 'w';
+    return '<span class="' + cls + '">' + w + '</span>';
+  }).join(' ');
+
+  var spans = el.querySelectorAll('.w');
+  var n = spans.length;
+  var raf = false;
+
+  function tick() {
+    raf = false;
+    var room = wrap.offsetHeight - window.innerHeight;
+    if (room <= 0) { for (var k = 0; k < n; k++) spans[k].style.setProperty('--o', '1'); return; }
+    var top = wrap.getBoundingClientRect().top;
+    var p = clamp((-top) / room, 0, 1);
+    var lit = p * (n + 8) - 4;            // unas palabras de margen al inicio/final
+    for (var i = 0; i < n; i++) {
+      var o = clamp(lit - i, 0, 1);
+      spans[i].style.setProperty('--o', (0.12 + 0.88 * o).toFixed(3));
+    }
+  }
+  function onScroll() { if (!raf) { raf = true; requestAnimationFrame(tick); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', tick);
+  tick();
 })();
