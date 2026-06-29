@@ -2047,3 +2047,16 @@ section h2 em { color:var(--lima); font-style:italic }
   .statement-text .w{color:#fff!important}
   .statement-text .w.lima{color:var(--lima)!important}
 }
+
+/* ── Footer mejorado (home) ── */
+.foot-desc{margin-top:.7rem;max-width:36ch;font-size:.78rem;line-height:1.7}
+.foot-col{display:flex;flex-direction:column;gap:.55rem}
+.foot-col-t{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.foot-col a{font-size:.8rem;transition:color .2s;width:fit-content}
+.foot-col .foot-address{margin-bottom:.2rem}
+.foot-col .foot-address p{font-size:.8rem;line-height:1.6}
+#footer .foot-desc{color:rgba(255,255,255,.4)!important}
+#footer .foot-col-t{color:var(--lima)!important;opacity:.85}
+#footer .foot-col a{color:rgba(255,255,255,.6)!important}
+#footer .foot-col a:hover{color:var(--lima)!important}
+#footer .foot-col .foot-address p{color:rgba(255,255,255,.42)!important}
