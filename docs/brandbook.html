@@ -100,12 +100,21 @@
     .nav-cta:hover{filter:brightness(1.07);box-shadow:0 10px 30px rgba(158,203,45,.4);transform:translateY(-1px)}
 
     /* HERO */
-    .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:7rem 0 clamp(2.5rem,6vh,5rem)}
-    .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;animation:kenburns 26s ease-in-out infinite alternate}
-    @keyframes kenburns{from{transform:scale(1.03)}to{transform:scale(1.13)}}
-    .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,26,13,.55) 0%,rgba(8,26,13,.3) 26%,rgba(8,26,13,.5) 52%,rgba(8,26,13,.78) 80%,rgba(8,26,13,.97) 100%)}
-    .hero-mouse{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.5;
-      background:radial-gradient(36rem 30rem at var(--mx,70%) var(--my,40%),rgba(110,200,60,.4),transparent 60%)}
+    .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:7rem 0 clamp(2.5rem,6vh,5rem);
+      background:radial-gradient(58rem 48rem at 78% 16%,rgba(98,188,36,.16),transparent 58%),radial-gradient(42rem 42rem at -5% 105%,rgba(30,104,48,.22),transparent 60%),#06140b}
+    /* malla tecnológica sutil, difuminada hacia los bordes */
+    .hero-grid{position:absolute;inset:0;z-index:0;pointer-events:none;
+      background-image:linear-gradient(rgba(168,216,50,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(168,216,50,.06) 1px,transparent 1px);
+      background-size:64px 64px;
+      -webkit-mask-image:radial-gradient(125% 100% at 76% 24%,#000 22%,transparent 72%);
+      mask-image:radial-gradient(125% 100% at 76% 24%,#000 22%,transparent 72%)}
+    /* línea de barrido tecnológica muy sutil */
+    .hero-scan{position:absolute;left:0;right:0;top:0;height:1px;z-index:0;pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(168,216,50,.5),transparent);opacity:.5;
+      animation:heroScan 7s ease-in-out infinite}
+    @keyframes heroScan{0%{transform:translateY(8vh);opacity:0}15%{opacity:.55}85%{opacity:.55}100%{transform:translateY(86vh);opacity:0}}
+    .hero-mouse{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.6;
+      background:radial-gradient(34rem 28rem at var(--mx,75%) var(--my,30%),rgba(110,200,60,.22),transparent 60%)}
     .hero .wrap{position:relative;z-index:2;width:100%}
     .hero .eyebrow{opacity:0;animation:fadeUp .8s .1s forwards}
     .hero h1{font-weight:300;font-size:clamp(3rem,9vw,8rem);line-height:.98;letter-spacing:-.04em;margin:1.6rem 0 0;max-width:14ch;text-shadow:0 2px 28px rgba(0,0,0,.5)}
@@ -235,8 +244,8 @@
     footer .copy{margin-top:1.6rem;font-size:.7rem;color:var(--muted2)}
 
     /* toast */
-    .toast{position:fixed;left:50%;bottom:2rem;transform:translate(-50%,140%);z-index:99;background:var(--lima);color:var(--ink);font-weight:600;font-size:.82rem;padding:.8rem 1.4rem;border-radius:100px;box-shadow:0 12px 30px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-    .toast.show{transform:translate(-50%,0)}
+    .toast{position:fixed;left:50%;bottom:2rem;transform:translate(-50%,160%);opacity:0;visibility:hidden;z-index:99;background:var(--lima);color:var(--ink);font-weight:600;font-size:.82rem;padding:.8rem 1.4rem;border-radius:100px;box-shadow:0 12px 30px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .35s,visibility .35s}
+    .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
 
     /* ===== Mobile-first tuning (la mayoría del tráfico llega desde el móvil) ===== */
     button,a,.col,.pillar{-webkit-tap-highlight-color:transparent}
@@ -378,8 +387,8 @@
 
   <!-- HERO -->
   <header class="hero" id="hero">
-    <img class="hero-photo" src="brand/hero.jpg" alt="Evento de marca Artis Global: escenario con el logo, los mensajes Estrategia, Ejecución, Crecimiento, Impacto y la audiencia.">
-    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-scan" aria-hidden="true"></div>
     <div class="hero-mouse" id="heroMouse" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow">Caso de estudio · Branding &amp; Legal Design</p>
