@@ -48,7 +48,11 @@ function heroTick() {
   const p       = clamp((sY - wrapTop) / room, 0, 1);
 
   const lift = p < PHASE_IN ? 0 : easeOut((p - PHASE_IN) / (1 - PHASE_IN)) * HERO_LIFT;
-  if (heroHeadline) heroHeadline.style.transform = `translateY(-${lift.toFixed(1)}px)`;
+  if (heroHeadline) {
+    heroHeadline.style.transform = `translateY(-${lift.toFixed(1)}px)`;
+    // El titular aparece al hacer scroll (desktop). En móvil (sin recorrido) queda visible.
+    heroHeadline.style.opacity = room > 40 ? easeOut(clamp((p - 0.03) / 0.22, 0, 1)).toFixed(3) : '1';
+  }
 
   const panP = clamp((p - PHASE_IN) / (1 - PHASE_IN), 0, 1);
   const panE = easeOut(panP);

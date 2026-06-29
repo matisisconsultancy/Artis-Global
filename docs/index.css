@@ -2018,3 +2018,14 @@ section h2 em { color:var(--lima); font-style:italic }
   .nav-logo-full { height: 40px }
   .nav-logo-full--footer { height: 48px }
 }
+
+/* ── HERO HOME con foto (pantalla LED) + texto que aparece al hacer scroll ── */
+.home-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+.home-hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,26,13,.4) 0%,rgba(8,26,13,.12) 32%,rgba(8,26,13,.6) 76%,rgba(8,26,13,.93) 100%)}
+/* la foto es el fondo: ocultamos el degradado y las partículas */
+#heroSticky .hero-bg, #heroSticky .hero-particles{display:none}
+/* el titular arranca oculto y aparece con el scroll (lo controla heroTick); en móvil siempre visible */
+.hero-headline-block{opacity:0}
+.hero-headline-block .hero-h1{text-shadow:0 2px 28px rgba(0,0,0,.55)}
+.hero-sub{text-shadow:0 1px 16px rgba(0,0,0,.6)}
+@media(max-width:640px){ .hero-headline-block{opacity:1} }
