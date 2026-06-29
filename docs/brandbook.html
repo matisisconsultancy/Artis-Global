@@ -335,9 +335,11 @@
     .g-item:hover .g-cap{transform:none;opacity:1}
     .g-zoom{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(8,26,13,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:.9rem;opacity:0;transform:scale(.8);transition:.3s}
     .g-item:hover .g-zoom{opacity:1;transform:none}
-    .g-cards{grid-column:span 4;grid-row:span 2}
+    .g-metro{grid-column:span 4;grid-row:span 2}
+    .g-cards2{grid-column:span 2;grid-row:span 2}
+    .g-event{grid-column:span 4;grid-row:span 2}
     .g-social{grid-column:span 2;grid-row:span 2}.g-pattern{grid-column:span 6}
-    .g-notebooks{grid-column:span 4}.g-tag{grid-column:span 2}
+    .g-marble{grid-column:span 2}.g-notebooks{grid-column:span 4}.g-tag{grid-column:span 6}
     .g-tag{display:flex;align-items:center;justify-content:center;text-align:center;padding:1.4rem;background:linear-gradient(135deg,#1a5c28,#0b3018);overflow:hidden}
     .g-tag .gt-grad{position:absolute;inset:0;background:linear-gradient(90deg,#a8d832,#1e6830,#a8d832);background-size:300% 100%;animation:flow 18s linear infinite;opacity:.22}
     .g-tag b{position:relative;z-index:1;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.3rem,2.4vw,1.7rem);color:#fff;line-height:1.2}
@@ -503,9 +505,17 @@
       <h2 data-reveal>La marca, <em>en el mundo real.</em></h2>
       <p class="desc" data-reveal>Del papel a la pantalla, el sistema se mantiene coherente: degradado, isotipo y tagline conviven en cada pieza. <strong style="color:#fff">Toca cualquier imagen para ampliarla.</strong></p>
       <div class="gallery">
-        <div class="g-item g-cards" data-reveal data-cur data-full="brand/mock-cards.jpg">
-          <img src="brand/mock-cards.jpg" alt="Tarjetas de presentación Artis Global sobre mármol" loading="lazy">
+        <div class="g-item g-metro" data-reveal data-cur data-full="brand/app-metro.jpg">
+          <img src="brand/app-metro.jpg" alt="Vallas publicitarias de Artis Global en el metro" loading="lazy">
+          <span class="g-zoom" aria-hidden="true">⤢</span><span class="g-cap">Vía pública · Metro</span>
+        </div>
+        <div class="g-item g-cards2" data-reveal data-cur data-full="brand/app-cards.jpg">
+          <img src="brand/app-cards.jpg" alt="Tarjetas de presentación premium Artis Global" loading="lazy">
           <span class="g-zoom" aria-hidden="true">⤢</span><span class="g-cap">Papelería · Tarjetas</span>
+        </div>
+        <div class="g-item g-event" data-reveal data-cur data-full="brand/hero.jpg">
+          <img src="brand/hero.jpg" alt="Activación de marca Artis Global en evento" loading="lazy">
+          <span class="g-zoom" aria-hidden="true">⤢</span><span class="g-cap">Activación · Evento</span>
         </div>
         <div class="g-item g-social" data-reveal data-cur data-full="brand/tile-social.jpg">
           <img src="brand/tile-social.jpg" alt="Pieza para redes sociales Artis Global" loading="lazy">
@@ -514,6 +524,10 @@
         <div class="g-item g-pattern" data-reveal data-cur data-full="brand/tile-pattern.jpg">
           <img src="brand/tile-pattern.jpg" alt="Patrón de marca con el isotipo Artis Global" loading="lazy">
           <span class="g-zoom" aria-hidden="true">⤢</span><span class="g-cap">Sistema · Patrón</span>
+        </div>
+        <div class="g-item g-marble" data-reveal data-cur data-full="brand/mock-cards.jpg">
+          <img src="brand/mock-cards.jpg" alt="Tarjetas Artis Global sobre mármol" loading="lazy">
+          <span class="g-zoom" aria-hidden="true">⤢</span><span class="g-cap">Papelería · Detalle</span>
         </div>
         <div class="g-item g-notebooks" data-reveal data-cur data-full="brand/mock-notebooks.jpg">
           <img src="brand/mock-notebooks.jpg" alt="Libretas de marca Artis Global" loading="lazy">
