@@ -164,7 +164,7 @@
 
     /* LOGO interactive stage */
     .stage{margin-top:3.4rem;border-radius:24px;overflow:hidden;border:1px solid var(--border)}
-    .stage-view{position:relative;overflow:hidden;min-height:clamp(280px,46vw,460px);display:flex;align-items:center;justify-content:center;padding:3rem;transition:background .5s}
+    .stage-view{position:relative;overflow:hidden;min-height:clamp(280px,46vw,460px);display:flex;align-items:center;justify-content:center;padding:3rem;transition:background-color .5s;background-size:300% 100%;animation:flow 20s linear infinite}
     .stage-glow{position:absolute;top:50%;left:50%;width:70%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(.85);background:radial-gradient(circle,rgba(168,216,50,.4),transparent 62%);filter:blur(36px);opacity:0;pointer-events:none;z-index:0}
     .logo-lockup{position:relative;z-index:1;display:flex;align-items:center;gap:clamp(.7rem,1.8vw,1.5rem)}
     .logo-lockup .ll-iso{height:clamp(78px,12.5vw,150px);width:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45));opacity:0;transform:translateY(16px) scale(.92)}
@@ -424,7 +424,7 @@
       <h2 data-reveal>Un isotipo que <em>funciona en cualquier fondo.</em></h2>
       <p class="desc" data-reveal>Lockup principal de isotipo + logotipo en tipografía IvyEpic. Pruébalo: cambia el fondo y observa cómo la marca mantiene su fuerza.</p>
       <div class="stage" data-reveal>
-        <div class="stage-view" id="stageView" style="background:linear-gradient(150deg,#0e3d20,#061812)">
+        <div class="stage-view" id="stageView" style="background-image:linear-gradient(90deg,#a8d832,#62bc24,#1e6830,#0e3a1e,#1e6830,#62bc24,#a8d832)">
           <span class="stage-glow" aria-hidden="true"></span>
           <div class="logo-lockup">
             <img src="brand/isotipo.png" alt="Isotipo Artis Global" class="ll-iso">
@@ -432,10 +432,10 @@
           </div>
         </div>
         <div class="stage-bar">
-          <button class="swatch-btn active" data-cur data-bg="linear-gradient(150deg,#0e3d20,#061812)" style="background:#0e3d20" aria-label="Fondo verde profundo"></button>
-          <button class="swatch-btn" data-cur data-bg="#081a0d" style="background:#081a0d" aria-label="Fondo tinta"></button>
-          <button class="swatch-btn" data-cur data-bg="var(--grad-iso)" style="background:linear-gradient(135deg,#9ecb2d,#1a5c28)" aria-label="Fondo lima-verde"></button>
-          <button class="swatch-btn" data-cur data-bg="#f5f4f0" style="background:#f5f4f0" aria-label="Fondo claro"></button>
+          <button class="swatch-btn active" data-cur data-bg="linear-gradient(90deg,#a8d832,#62bc24,#1e6830,#0e3a1e,#1e6830,#62bc24,#a8d832)" style="background:linear-gradient(135deg,#a8d832,#1e6830)" aria-label="Fondo degradado de marca"></button>
+          <button class="swatch-btn" data-cur data-bg="linear-gradient(110deg,#0e3d20,#061812,#0a2e18,#061812,#0e3d20)" style="background:#0e3d20" aria-label="Fondo verde profundo"></button>
+          <button class="swatch-btn" data-cur data-bg="linear-gradient(#081a0d,#081a0d)" style="background:#081a0d" aria-label="Fondo tinta"></button>
+          <button class="swatch-btn" data-cur data-bg="linear-gradient(#f5f4f0,#f5f4f0)" style="background:#f5f4f0" aria-label="Fondo claro"></button>
           <span class="hint">Cambia el fondo →</span>
         </div>
       </div>
@@ -607,7 +607,7 @@
       b.addEventListener('click',function(){
         document.querySelectorAll('.swatch-btn').forEach(function(x){x.classList.remove('active');});
         b.classList.add('active');
-        view.style.background=b.getAttribute('data-bg');
+        view.style.backgroundImage=b.getAttribute('data-bg');
       });
     });
 
