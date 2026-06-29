@@ -2011,3 +2011,10 @@ section h2 em { color:var(--lima); font-style:italic }
 
 /* Scroll hint dots — desktop: hidden */
 .dsc-scroll-hint { display: none }
+/* ── Brand logo lockup (isotipo + wordmark IvyEpic) ── */
+.nav-logo-full { height: 48px; width: auto; display: block }
+.nav-logo-full--footer { height: 56px }
+@media(max-width:640px){
+  .nav-logo-full { height: 40px }
+  .nav-logo-full--footer { height: 48px }
+}
