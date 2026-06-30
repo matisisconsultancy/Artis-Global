@@ -434,6 +434,32 @@ var b1btn = $('b1'); if (b1btn) b1btn.addEventListener('click', function() { set
 var n1btn = $('n1'); if (n1btn) n1btn.addEventListener('click', function() { sel.svc ? setStep(2) : shake($('ws1')); });
 var b2btn = $('b2'); if (b2btn) b2btn.addEventListener('click', function() { setStep(1); });
 
+/* Clave gratuita de Web3Forms: créala en https://web3forms.com con el correo
+   Artisglobalsas@gmail.com y pega aquí el "Access Key". Mientras no esté puesta,
+   el formulario usa un respaldo por mailto hacia ese mismo correo. */
+var WEB3FORMS_KEY = 'PEGA_AQUI_TU_ACCESS_KEY';
+var LEADS_EMAIL   = 'Jcastano.artis@gmail.com';
+
+function wizSuccess() {
+  if (wizHead) wizHead.style.display = 'none';
+  if (wizBody) wizBody.style.display = 'none';
+  if (wizOk) {
+    wizOk.style.display = 'block';
+    wizOk.animate(
+      [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }],
+      { duration: 420, easing: 'ease', fill: 'forwards' }
+    );
+  }
+}
+function leadMailto(d) {
+  var body = 'Tipo de organización: ' + d.tipo + '\nServicio: ' + d.servicio +
+             '\nNombre: ' + d.nombre + '\nOrganización: ' + d.org +
+             '\nCorreo: ' + d.correo + '\nWhatsApp: ' + d.whatsapp + '\nCiudad: ' + d.ciudad;
+  window.location.href = 'mailto:' + LEADS_EMAIL +
+    '?subject=' + encodeURIComponent('Nueva solicitud de asesoría — ' + d.nombre) +
+    '&body=' + encodeURIComponent(body);
+}
+
 var subbtn = $('sub');
 if (subbtn) {
   subbtn.addEventListener('click', function() {
@@ -445,15 +471,43 @@ if (subbtn) {
       f.addEventListener('input', function() { f.style.borderColor = ''; }, { once: true });
     });
     if (bad.length) { shake($('ws2')); return; }
-    if (wizHead) wizHead.style.display = 'none';
-    if (wizBody) wizBody.style.display = 'none';
-    if (wizOk) {
-      wizOk.style.display = 'block';
-      wizOk.animate(
-        [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: 420, easing: 'ease', fill: 'forwards' }
-      );
+
+    var d = {
+      tipo:     sel.org || '—',
+      servicio: sel.svc || '—',
+      nombre:   ($('fn') || {}).value || '',
+      org:      ($('fo') || {}).value || '',
+      correo:   ($('fe') || {}).value || '',
+      whatsapp: ($('ft') || {}).value || '',
+      ciudad:   ($('fc') || {}).value || ''
+    };
+
+    // Sin clave configurada → respaldo por correo del cliente
+    if (!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('PEGA_AQUI') === 0) {
+      leadMailto(d); wizSuccess(); return;
     }
+
+    var btn = this; btn.style.pointerEvents = 'none'; btn.style.opacity = '.7';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: 'Nueva solicitud de asesoría — ' + d.nombre,
+        from_name: d.nombre || 'Web ARTIS Global',
+        'Tipo de organización': d.tipo,
+        'Servicio': d.servicio,
+        'Nombre': d.nombre,
+        'Organización': d.org,
+        'Correo': d.correo,
+        'WhatsApp': d.whatsapp,
+        'Ciudad': d.ciudad
+      })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(res) { if (res && res.success) { wizSuccess(); } else { throw new Error('fail'); } })
+      .catch(function() { leadMailto(d); wizSuccess(); })
+      .then(function() { btn.style.pointerEvents = ''; btn.style.opacity = ''; });
   });
 }
 
