@@ -437,7 +437,7 @@ var b2btn = $('b2'); if (b2btn) b2btn.addEventListener('click', function() { set
 /* Clave gratuita de Web3Forms: créala en https://web3forms.com con el correo
    Artisglobalsas@gmail.com y pega aquí el "Access Key". Mientras no esté puesta,
    el formulario usa un respaldo por mailto hacia ese mismo correo. */
-var WEB3FORMS_KEY = 'PEGA_AQUI_TU_ACCESS_KEY';
+var WEB3FORMS_KEY = 'f56bcc5c-695e-4023-913a-8c9eac333931';
 var LEADS_EMAIL   = 'Jcastano.artis@gmail.com';
 
 function wizSuccess() {
