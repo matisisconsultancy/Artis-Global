@@ -553,6 +553,10 @@ var menuBtn    = $('menuBtn');
 var mobOverlay = $('mobOverlay');
 var mobX       = $('mobClose');
 
+// Guard para evitar la "reapertura fantasma": al cerrar, el click sintético
+// del mismo toque podía caer sobre el botón hamburguesa y reabrir el menú.
+var closeGuardUntil = 0;
+
 function closeMob() {
   if (mobOverlay) mobOverlay.classList.remove('open');
   if (menuBtn) {
@@ -561,9 +565,11 @@ function closeMob() {
     menuBtn.setAttribute('aria-label', 'Abrir menú');
   }
   document.body.style.overflow = '';
+  closeGuardUntil = performance.now() + 500;
 }
 
 function openMob() {
+  if (performance.now() < closeGuardUntil) return;   // ignora reapertura inmediata
   if (mobOverlay) mobOverlay.classList.add('open');
   if (menuBtn) {
     menuBtn.classList.add('open');
@@ -574,14 +580,17 @@ function openMob() {
 }
 if (menuBtn) {
   menuBtn.addEventListener('click', function() {
-    // Toggle: si ya está abierto, cierra correctamente
     if (mobOverlay && mobOverlay.classList.contains('open')) { closeMob(); }
     else { openMob(); }
   });
 }
 if (mobX) {
-  mobX.addEventListener('click', function(e) { e.stopPropagation(); closeMob(); });
-  mobX.addEventListener('touchstart', function(e) { e.stopPropagation(); closeMob(); }, { passive: true });
+  // Solo 'click' (con preventDefault) para no disparar dos veces en táctil
+  mobX.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); closeMob(); });
+}
+// Cerrar tocando fuera del contenido del menú (en el propio overlay)
+if (mobOverlay) {
+  mobOverlay.addEventListener('click', function(e) { if (e.target === mobOverlay) closeMob(); });
 }
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMob(); });
 
@@ -836,7 +845,16 @@ $$('a[href^="#"]').forEach(function(a) {
     // Retirar del DOM tras la transición
     setTimeout(function () { if (pre && pre.parentNode) pre.parentNode.removeChild(pre); }, 700);
   }
-  // Ocultar poco después de 'load'; con un respaldo por si algo se atasca
-  window.addEventListener('load', function () { setTimeout(hide, 350); });
-  setTimeout(hide, 4000);
+  // Mostrar la animación un tiempo mínimo para que se aprecie, aunque la
+  // página cargue al instante. Se oculta cuando pasa 'load' Y ya se cumplió
+  // el mínimo. Respaldo por si la carga se atasca.
+  var start = performance.now();
+  var MIN_MS = 2200;
+  function scheduleHide() {
+    var elapsed = performance.now() - start;
+    setTimeout(hide, Math.max(0, MIN_MS - elapsed));
+  }
+  if (document.readyState === 'complete') scheduleHide();
+  else window.addEventListener('load', scheduleHide);
+  setTimeout(hide, 7000);
 })();
