@@ -2060,3 +2060,100 @@ section h2 em { color:var(--lima); font-style:italic }
 #footer .foot-col a{color:rgba(255,255,255,.6)!important}
 #footer .foot-col a:hover{color:var(--lima)!important}
 #footer .foot-col .foot-address p{color:rgba(255,255,255,.42)!important}
+
+
+/* ═══════════════════════════════════════════════════════════
+   CAPA MÓVIL INTERACTIVA · mobile-first  (2026-07)
+   Barra de progreso · barra de acción · feedback táctil · safe-area
+═══════════════════════════════════════════════════════════ */
+
+/* ── Barra de progreso de lectura (todos los tamaños) ── */
+.scroll-progress{
+  position:fixed; top:0; left:0; height:3px; width:100%;
+  transform:scaleX(0); transform-origin:0 50%;
+  background:linear-gradient(90deg,#a8d832,#4a8c1a);
+  z-index:9500; pointer-events:none;
+  will-change:transform;
+  transition:transform .08s linear;
+}
+
+/* ── Barra de acción móvil (oculta en desktop) ── */
+.m-actionbar{ display:none }
+
+@media(max-width:760px){
+  .m-actionbar{
+    display:flex; gap:.6rem;
+    position:fixed; left:0; right:0; bottom:0; z-index:8000;
+    padding:.7rem clamp(.9rem,4vw,1.3rem);
+    padding-bottom:calc(.7rem + env(safe-area-inset-bottom));
+    background:rgba(8,26,13,.72);
+    -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+    border-top:1px solid rgba(168,216,50,.18);
+    transform:translateY(130%);
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .m-actionbar.show{ transform:translateY(0) }
+
+  .mab-btn{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:.5rem;
+    min-height:52px; border-radius:14px;
+    font-family:inherit; font-size:.95rem; font-weight:600; letter-spacing:.01em;
+    text-decoration:none; cursor:pointer;
+    transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .mab-btn:active{ transform:scale(.955) }
+
+  .mab-wa{
+    flex:0 0 auto; width:52px; padding:0;
+    color:#eafcd6; background:rgba(37,211,102,.16);
+    border:1px solid rgba(37,211,102,.45);
+  }
+  .mab-wa span{ display:none }               /* solo icono para ahorrar espacio */
+  .mab-wa:active{ background:rgba(37,211,102,.28) }
+
+  .mab-cta{
+    color:#08210d;
+    background:linear-gradient(135deg,#c5ee4e 0%,#9ecb2d 45%,#6fae1e 100%);
+    box-shadow:0 8px 26px rgba(120,180,40,.4);
+  }
+
+  /* El banner de cookies sube para no chocar con la barra */
+  body.actionbar-on .ck-banner.ck-visible{
+    bottom:calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Pantallas muy angostas: mostrar también el texto de WhatsApp */
+@media(max-width:380px){
+  .mab-cta{ font-size:.88rem }
+}
+
+/* ── Feedback táctil general (solo dispositivos táctiles) ── */
+@media(hover:none){
+  .cta-btn, .ghost-btn, .nav-logo, .mob-cta-link,
+  .acc-trigger, .proc-step, .fc-card,
+  .foot-col a, .ci-item, .opt, .ck-btn-primary, .ck-btn-secondary{
+    -webkit-tap-highlight-color:transparent;
+  }
+  .cta-btn:active, .ck-btn-primary:active, .mob-cta-link:active{ transform:scale(.96) }
+  .fc-card:active{ transform:scale(.98) }
+  .acc-trigger:active{ background:rgba(255,255,255,.03) }
+  .foot-col a:active{ opacity:.6 }
+}
+
+/* ── Evitar el zoom automático de iOS al enfocar inputs ── */
+@media(max-width:760px){
+  input, select, textarea{ font-size:16px !important }
+  /* Objetivos táctiles cómodos */
+  .nav-link, .foot-col a, .mob-overlay a{ min-height:44px; display:flex; align-items:center }
+  .mob-overlay a{ justify-content:center }
+  /* El banner de cookies respeta el notch inferior */
+  .ck-banner{ bottom:calc(env(safe-area-inset-bottom) + .8rem) }
+}
+
+/* ── Respeta la preferencia de menos movimiento ── */
+@media(prefers-reduced-motion:reduce){
+  .scroll-progress{ transition:none }
+  .m-actionbar{ transition:none }
+}
