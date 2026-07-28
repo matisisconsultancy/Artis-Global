@@ -71,7 +71,12 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <!-- Precarga de la imagen LCP (hero) para acelerar el primer render -->
+  <link rel="preload" as="image" href="brand/hero-home.webp" type="image/webp" fetchpriority="high">
+  <!-- Fuentes cargadas de forma asíncrona para no bloquear el render -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -109,7 +114,10 @@
   <!-- HERO — Hark Capital style scroll-driven -->
   <div id="hero-wrap">
     <div class="hero-sticky" id="heroSticky">
-      <img class="home-hero-photo" src="brand/hero-home.jpg" alt="Pantalla LED gigante con la marca Artis Global y fondo abstracto verde" />
+      <picture>
+        <source srcset="brand/hero-home.webp" type="image/webp">
+        <img class="home-hero-photo" src="brand/hero-home.jpg" alt="Pantalla LED gigante con la marca Artis Global y fondo abstracto verde" width="1600" height="1066" fetchpriority="high" decoding="async" />
+      </picture>
       <div class="home-hero-scrim" aria-hidden="true"></div>
       <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
       <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
@@ -153,7 +161,10 @@
     <div id="desafios-wrap">
       <div class="dsc-sticky" id="dscSticky">
         <div class="dsc-bg-img" id="dscBgImg">
-          <img src="brand/desafios-salud.jpg" alt="Línea de electrocardiograma sobre fondo verde: soluciones para el sector salud en Colombia" loading="lazy">
+          <picture>
+            <source srcset="brand/desafios-salud.webp" type="image/webp">
+            <img src="brand/desafios-salud.jpg" alt="Línea de electrocardiograma sobre fondo verde: soluciones para el sector salud en Colombia" width="2560" height="1707" loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="dsc-overlay" aria-hidden="true"></div>
         <div class="dsc-cards" id="dscCards">
@@ -534,7 +545,7 @@
             <span class="ck-toggle-name">Analíticas</span>
             <span class="ck-toggle-desc">Nos ayudan a entender cómo se usa el sitio de forma anónima.</span>
           </div>
-          <button class="ck-toggle" id="ckAnalytics" role="switch" aria-checked="false" data-key="analytics">
+          <button class="ck-toggle" id="ckAnalytics" role="switch" aria-checked="false" aria-label="Activar cookies analíticas" data-key="analytics">
             <span class="ck-thumb"></span>
           </button>
         </div>
@@ -543,7 +554,7 @@
             <span class="ck-toggle-name">Marketing</span>
             <span class="ck-toggle-desc">Permiten personalizar anuncios y comunicaciones relevantes.</span>
           </div>
-          <button class="ck-toggle" id="ckMarketing" role="switch" aria-checked="false" data-key="marketing">
+          <button class="ck-toggle" id="ckMarketing" role="switch" aria-checked="false" aria-label="Activar cookies de marketing" data-key="marketing">
             <span class="ck-thumb"></span>
           </button>
         </div>
