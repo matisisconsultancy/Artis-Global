@@ -2219,8 +2219,8 @@ section h2 em { color:var(--lima); font-style:italic }
 .mob-nav{ display:flex; flex-direction:column; margin-top:auto; margin-bottom:auto }
 .mob-nav a{
   display:flex; align-items:baseline; gap:1rem;
-  font-family:var(--serif, Cormorant), serif;
-  font-weight:400; font-size:clamp(2.4rem,11vw,3.4rem); line-height:1.18;
+  font-family:var(--sans);
+  font-weight:500; font-size:clamp(2rem,9.5vw,2.9rem); line-height:1.2;
   color:var(--white); letter-spacing:-.01em;
   padding:.35rem 0; border-bottom:1px solid rgba(255,255,255,.07);
   -webkit-tap-highlight-color:transparent;
