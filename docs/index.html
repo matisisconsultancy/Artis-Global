@@ -81,6 +81,14 @@
 </head>
 <body>
 
+  <!-- Animación de carga -->
+  <div class="preloader" id="preloader" role="status" aria-label="Cargando">
+    <div class="pre-inner">
+      <img src="brand/isotipo.png" alt="" class="pre-logo" width="72" height="72">
+      <div class="pre-bar" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
+
   <!-- Barra de progreso de lectura (feedback interactivo del scroll) -->
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -104,12 +112,28 @@
     </div>
   </nav>
 
-  <div class="mob-overlay" id="mobOverlay" role="dialog" aria-label="Menú de navegación">
-    <button class="mob-x" id="mobClose" aria-label="Cerrar menú">✕</button>
-    <a href="#desafios"  onclick="closeMob()">Desafíos</a>
-    <a href="#solucion"  onclick="closeMob()">Solución</a>
-    <a href="#servicios" onclick="closeMob()">Servicios</a>
-    <a href="#contacto"  onclick="closeMob()" class="mob-cta-link">Agendar asesoría</a>
+  <div class="mob-overlay" id="mobOverlay" role="dialog" aria-label="Menú de navegación" aria-modal="true">
+    <div class="mob-head">
+      <a href="#hero-wrap" class="mob-logo" onclick="closeMob()" aria-label="Inicio">
+        <img src="artis-logo.png" alt="Artis Global">
+      </a>
+      <button class="mob-x" id="mobClose" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="mob-nav" aria-label="Navegación principal">
+      <a href="#desafios"  onclick="closeMob()"><span class="mob-num">01</span> Desafíos</a>
+      <a href="#solucion"  onclick="closeMob()"><span class="mob-num">02</span> Solución</a>
+      <a href="#servicios" onclick="closeMob()"><span class="mob-num">03</span> Servicios</a>
+      <a href="#contacto"  onclick="closeMob()"><span class="mob-num">04</span> Contacto</a>
+    </nav>
+    <div class="mob-foot">
+      <a href="#contacto" class="mob-cta-link" onclick="closeMob()">Agendar asesoría <span aria-hidden="true">↗</span></a>
+      <div class="mob-foot-links">
+        <a href="https://wa.me/573195079403" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="tel:+573195079403">+57 319 507 9403</a>
+      </div>
+    </div>
   </div>
 
 

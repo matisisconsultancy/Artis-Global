@@ -820,3 +820,23 @@ $$('a[href^="#"]').forEach(function(a) {
   window.addEventListener('load', update);
   update();
 })();
+
+
+/* ─────────────────────────────────────────────────
+   22. PRELOADER — ocultar al terminar de cargar
+───────────────────────────────────────────────── */
+(function () {
+  var pre = document.getElementById('preloader');
+  if (!pre) return;
+  var done = false;
+  function hide() {
+    if (done) return;
+    done = true;
+    pre.classList.add('hidden');
+    // Retirar del DOM tras la transición
+    setTimeout(function () { if (pre && pre.parentNode) pre.parentNode.removeChild(pre); }, 700);
+  }
+  // Ocultar poco después de 'load'; con un respaldo por si algo se atasca
+  window.addEventListener('load', function () { setTimeout(hide, 350); });
+  setTimeout(hide, 4000);
+})();
