@@ -2,7 +2,7 @@
 <html lang="es-CO" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -81,6 +81,8 @@
 </head>
 <body>
 
+  <!-- Barra de progreso de lectura (feedback interactivo del scroll) -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav id="nav">
@@ -502,6 +504,21 @@
     </div><!-- .cf-sticky -->
     <div class="cf-spacer" aria-hidden="true"></div>
   </div><!-- #cf-wrap -->
+
+
+  <!-- ═══════════════════════════════════
+       BARRA DE ACCIÓN MÓVIL (app-like, solo móvil)
+  ═══════════════════════════════════ -->
+  <div class="m-actionbar" id="mActionbar" aria-label="Acciones rápidas">
+    <a class="mab-btn mab-wa" href="https://wa.me/573195079403?text=Hola%20ARTIS%2C%20quiero%20agendar%20una%20asesor%C3%ADa" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A7.9 7.9 0 0 0 4.9 15.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.8 1 7.9 7.9 0 0 0 5.6-13.6ZM12 18.6a6.6 6.6 0 0 1-3.4-.9l-.24-.15-2.5.66.67-2.44-.16-.25A6.6 6.6 0 1 1 12 18.6Zm3.6-4.95c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.07a.36.36 0 0 0-.02-.34c-.05-.1-.44-1.06-.6-1.45s-.32-.33-.44-.34h-.38a.73.73 0 0 0-.53.25 2.2 2.2 0 0 0-.69 1.64 3.83 3.83 0 0 0 .8 2.03 8.75 8.75 0 0 0 3.35 2.96c1.25.54 1.74.58 2.36.49a2 2 0 0 0 1.32-.93 1.65 1.65 0 0 0 .11-.93c-.05-.08-.18-.13-.38-.23Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+    <a class="mab-btn mab-cta" href="#contacto">
+      <span>Agendar asesoría</span>
+      <svg viewBox="0 0 10 10" fill="none" width="11" height="11" aria-hidden="true"><path d="M2 8L8 2M8 2H3M8 2v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </a>
+  </div>
 
 
   <!-- ═══════════════════════════════════

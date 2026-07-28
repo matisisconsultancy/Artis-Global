@@ -757,3 +757,49 @@ $$('a[href^="#"]').forEach(function(a) {
   window.addEventListener('load', tick);
   tick();
 })();
+
+
+/* ─────────────────────────────────────────────────
+   21. CAPA MÓVIL INTERACTIVA
+       · Barra de progreso de lectura
+       · Barra de acción flotante (WhatsApp / Agendar)
+───────────────────────────────────────────────── */
+(function () {
+  var bar   = document.getElementById('scrollProgress');
+  var abar  = document.getElementById('mActionbar');
+  var contacto = document.getElementById('contacto');
+  var doc = document.documentElement;
+  var contactoVisible = false;
+  var raf = false;
+
+  // Oculta la barra de acción cuando la sección de contacto está a la vista
+  if (contacto && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      contactoVisible = entries[0].isIntersecting;
+      update();
+    }, { threshold: 0.18 }).observe(contacto);
+  }
+
+  function update() {
+    raf = false;
+    var st = window.pageYOffset || doc.scrollTop || 0;
+    var h  = doc.scrollHeight - window.innerHeight;
+    var p  = h > 0 ? st / h : 0;
+    if (p < 0) p = 0; else if (p > 1) p = 1;
+
+    if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+
+    // Mostrar la barra de acción tras pasar el hero y ocultarla en #contacto
+    if (abar) {
+      var show = st > window.innerHeight * 0.6 && !contactoVisible;
+      abar.classList.toggle('show', show);
+      document.body.classList.toggle('actionbar-on', show);
+    }
+  }
+
+  function onScroll() { if (!raf) { raf = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', update);
+  update();
+})();
