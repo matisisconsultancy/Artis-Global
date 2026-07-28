@@ -2173,7 +2173,7 @@ section h2 em { color:var(--lima); font-style:italic }
   #nav .cta-btn{ display:none !important }
   .nav-aside{ position:static; gap:0 }
   /* Hero: enfocar el recorte en el logo de ARTIS de la pantalla LED */
-  .home-hero-photo{ object-position:33% center }
+  .home-hero-photo{ object-position:31% center }
 }
 
 @media(max-width:640px){
