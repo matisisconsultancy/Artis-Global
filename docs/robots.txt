@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.artisglobal.com/sitemap.xml
+Sitemap: https://www.somosartis.com/sitemap.xml
