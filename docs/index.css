@@ -2157,3 +2157,36 @@ section h2 em { color:var(--lima); font-style:italic }
   .scroll-progress{ transition:none }
   .m-actionbar{ transition:none }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   AJUSTES MÓVILES · header, menú, Desafíos  (2026-07 · fix)
+═══════════════════════════════════════════════════════════ */
+
+/* El menú desplegable cubre TODO (incluido el nav) → una sola X, cierra bien */
+.mob-overlay{ z-index:9600 }
+
+@media(max-width:760px){
+  /* Header: logo centrado y sin el botón verde (el CTA vive en la barra inferior) */
+  #nav{ justify-content:center }
+  #nav .cta-btn{ display:none !important }
+  .nav-aside{ position:absolute; right:var(--gutter); top:0; bottom:0;
+              display:flex; align-items:center; gap:0 }
+  .nav-logo{ margin:0 auto }
+}
+
+@media(max-width:640px){
+  /* Desafíos: la imagen del electrocardiograma es el fondo y las cards
+     flotan encima → sección integrada, sin costura entre bloques */
+  #desafios-wrap{ background:#0b2114 }
+  .dsc-sticky{ height:auto !important; min-height:0 !important; overflow:hidden !important }
+  .dsc-bg-img{ position:absolute !important; inset:0 !important;
+               height:100% !important; width:100% !important; overflow:hidden }
+  .dsc-bg-img img{ height:100% !important; width:100% !important;
+                   object-fit:cover; object-position:center }
+  .dsc-overlay{ position:absolute !important; inset:0; z-index:1;
+    background:linear-gradient(180deg,
+      rgba(9,28,17,.74) 0%, rgba(9,28,17,.40) 45%, rgba(9,28,17,.82) 100%) }
+  .dsc-cards{ background:transparent !important }
+  .dsc-scroll-hint{ background:transparent !important }
+}

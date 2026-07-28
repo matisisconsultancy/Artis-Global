@@ -558,16 +558,25 @@ function closeMob() {
   if (menuBtn) {
     menuBtn.classList.remove('open');
     menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Abrir menú');
   }
   document.body.style.overflow = '';
 }
 
-if (menuBtn) {
-  menuBtn.addEventListener('click', function() {
-    if (mobOverlay) mobOverlay.classList.add('open');
+function openMob() {
+  if (mobOverlay) mobOverlay.classList.add('open');
+  if (menuBtn) {
     menuBtn.classList.add('open');
     menuBtn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+    menuBtn.setAttribute('aria-label', 'Cerrar menú');
+  }
+  document.body.style.overflow = 'hidden';
+}
+if (menuBtn) {
+  menuBtn.addEventListener('click', function() {
+    // Toggle: si ya está abierto, cierra correctamente
+    if (mobOverlay && mobOverlay.classList.contains('open')) { closeMob(); }
+    else { openMob(); }
   });
 }
 if (mobX) {
@@ -767,17 +776,24 @@ $$('a[href^="#"]').forEach(function(a) {
 (function () {
   var bar   = document.getElementById('scrollProgress');
   var abar  = document.getElementById('mActionbar');
-  var contacto = document.getElementById('contacto');
   var doc = document.documentElement;
-  var contactoVisible = false;
   var raf = false;
 
-  // Oculta la barra de acción cuando la sección de contacto está a la vista
-  if (contacto && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      contactoVisible = entries[0].isIntersecting;
+  // Oculta la barra de acción cuando el formulario de contacto o el footer
+  // están a la vista (para no tapar el formulario ni los enlaces legales).
+  var hideEls = [document.getElementById('contacto'),
+                 document.getElementById('footer')].filter(Boolean);
+  var visibleZones = 0;
+  if (hideEls.length && 'IntersectionObserver' in window) {
+    var seen = new Set();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target);
+      });
+      visibleZones = seen.size;
       update();
-    }, { threshold: 0.18 }).observe(contacto);
+    }, { threshold: 0.12 });
+    hideEls.forEach(function (el) { io.observe(el); });
   }
 
   function update() {
@@ -789,9 +805,10 @@ $$('a[href^="#"]').forEach(function(a) {
 
     if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
 
-    // Mostrar la barra de acción tras pasar el hero y ocultarla en #contacto
+    // Mostrar tras pasar el hero; ocultar en contacto/footer y cerca del final
     if (abar) {
-      var show = st > window.innerHeight * 0.6 && !contactoVisible;
+      var nearBottom = (st + window.innerHeight) > (doc.scrollHeight - 40);
+      var show = st > window.innerHeight * 0.6 && visibleZones === 0 && !nearBottom;
       abar.classList.toggle('show', show);
       document.body.classList.toggle('actionbar-on', show);
     }
